@@ -71,14 +71,21 @@ public class Main {
      * @return The compressed version of the string
      */
     public static String compressString(String stringToCompress) {
-        String compressedString = "";
+       // String compressedString = "";
+        StringBuilder compressedString = new StringBuilder();
+        int countConsecutive = 0;
+        for (int i=0; i<stringToCompress.length(); i++){
+            countConsecutive++;
+            if(i+1 >= stringToCompress.length() ||
+                    stringToCompress.charAt(i)!=stringToCompress.charAt(i+1)){
+                compressedString.append(stringToCompress.charAt(i));
+                compressedString.append(countConsecutive);
+                countConsecutive=0;
+            }
+        }
+        return compressedString.toString();
 
-        /*
-        TODO: Your code for part B1 is here...
-        Note: you may change the given code, but you must not change the signature of the method.
-         */
-
-        return compressedString;
+        //return compressedString;
     }
 
     /**
