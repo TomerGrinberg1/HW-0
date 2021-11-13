@@ -11,10 +11,53 @@ public class Main {
      * @param grade The grade
      */
     public static void gradeMessage(int grade) {
-        /*
-        TODO: Your code for part A is here...
-         */
+          switch (grade){
+            case 100:
+                System.out.println("Excellent");
+                break;
+            case 99:
+            case 98:
+            case 97:
+            case 96:
+            case 95:
+            case 94:
+            case 93:
+            case 92:
+            case 91:
+            case 90:
+                System.out.println("Great");
+                break;
+            case 89:
+            case 88:
+            case 87:
+            case 86:
+            case 85:
+            case 84:
+            case 83:
+            case 82:
+            case 81:
+            case 80:
+                System.out.println("Very Good");
+                break;
+            case 79:
+            case 78:
+            case 77:
+            case 76:
+            case 75:
+            case 74:
+            case 73:
+            case 72:
+            case 71:
+            case 70:
+                System.out.println("Good");
+                break;
+
+            default:
+                System.out.println("OK");
+        }
     }
+
+
 
     /**
      * Compresses a given string.
