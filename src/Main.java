@@ -100,14 +100,28 @@ public class Main {
      * @return The decompressed string
      */
     public static String decompressString(String compressedString) {
-        String decompressedString = "";
 
-        /*
-        TODO: Your code for part B2 is here...
-        Note: you may change the given code, but you must not change the signature of the method.
-         */
+        StringBuilder decompressedString = new StringBuilder();
+        String temp = "";
+        int countConsecutive = 0;
+        for (int i=0; i<compressedString.length(); i++){
+            if(compressedString.charAt(i)<=57 && compressedString.charAt(i)>=48){
+                countConsecutive = countConsecutive*10 + compressedString.charAt(i) - 48;
+                if (i+1 < compressedString.length() &&
+                        ((compressedString).charAt(i+1)<=57 && compressedString.charAt(i+1)>=48)){
+                    continue;
+                }
+                for(int k =0; k <countConsecutive; k++){
+                    decompressedString.append(temp);
+                }
+                temp = "";
+                countConsecutive = 0;
+            }
+            else
+                temp = temp + compressedString.charAt(i);
+        }
 
-        return decompressedString;
+        return decompressedString.toString();
     }
 
     /**
@@ -120,20 +134,43 @@ public class Main {
      */
     public static double calculateTax(int salary) {
         double tax = 0.0;
+        double taxPercentageL1=0.1; double taxPercentageL2=0.14;  double taxPercentageL3=0.2;// L stands for Level
+        double taxPercentageL4=0.31; double taxPercentageL5=0.35;  double taxPercentageL6=0.5;
+        int taxFactor=5000;
+        int maxTaxSalary=25000;
+        int taxLevel=salary/taxFactor;
+        int difference= (salary - taxLevel*taxFactor);
+        switch (taxLevel) {
+            case 0:
+                tax = tax + difference * taxPercentageL1;
+                break;
+            case 1:
+                tax = taxFactor * taxPercentageL1 + difference * taxPercentageL2;
+                break;
+            case 2:
+                tax = taxFactor *(taxPercentageL1+taxPercentageL2)+difference*taxPercentageL3;
+                break;
+            case 3:
+                tax = taxFactor *(taxPercentageL1+taxPercentageL2+taxPercentageL3)+ difference*taxPercentageL4;
+                break;
+            case 4:
+                tax = taxFactor *(taxPercentageL1+taxPercentageL2+taxPercentageL3+taxPercentageL4)+difference*taxPercentageL5;
+                break;
+            case 5:
+                tax = taxFactor *(taxPercentageL1+taxPercentageL2+taxPercentageL3+taxPercentageL4+taxPercentageL5)+difference*taxPercentageL6;
+                break;
+            default:
+                tax = taxFactor *(taxPercentageL1+taxPercentageL2+taxPercentageL3+taxPercentageL4+taxPercentageL5)+(salary-maxTaxSalary)*taxPercentageL6;
 
-        /*
-        TODO: Your code for part B2 is here...
-        Note: you may change the given code, but you must not change the signature of the method.
-         */
-
+        }
         return tax;
     }
 
     public static void main(String[] args) throws FileNotFoundException {
-        String filePath = args[0];
-        File file = new File(filePath);
-        Scanner scanner = new Scanner(file);
-
+      //  String filePath = args[0];
+        //File file = new File(filePath);
+        Scanner scanner = new Scanner(System.in);
+/*
         // Tests for part A
         System.out.println("---------- Tests for part A ----------");
         int numberOfGrades = scanner.nextInt();
@@ -173,7 +210,7 @@ public class Main {
             boolean isEqual = stringToCompress.equals(decompressedString);
             System.out.println("decompress(compress(" + stringToCompress + ")) == " + stringToCompress + "? " + isEqual);
         }
-
+*/
         // Tests for part C
         System.out.println("\n---------- Tests for part C ----------");
         int numberOfSalaries = scanner.nextInt();
